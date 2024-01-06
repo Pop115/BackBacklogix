@@ -27,7 +27,7 @@ router.post('/steamGames', async function (req, res, next) {
     }
 });
 
-router.post("gameInfo", async function (req, res) {
+router.post("/gameInfo", async function (req, res) {
 
     const {appId, steamUserId} = req.body;
 
@@ -35,7 +35,7 @@ router.post("gameInfo", async function (req, res) {
         const response = await axios.get(steamGameInfoApiUrl + "?appids=" + appId + "&steamid=" + steamUserId);
         console.log(response);
         if (response.status === 200) {
-            const data = response[appId].data;
+            const data = response.data;
             res.json(data);
         } else {
             res.status(response.status).send(response.statusText);

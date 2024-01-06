@@ -12,11 +12,17 @@ router.post('/database', async function (req, res, next) {
 
     console.log("Querying Notion API")
 
-    const response = await notion.databases.query({
-        database_id: databaseId,
-    });
-    console.log("Response from Notion API", response);
-    res.send(response);
+    try {
+        const response = await notion.databases.query({
+            database_id: databaseId,
+        });
+        console.log("Response from Notion API", response);
+        res.send(response);
+    }catch(error){
+        //APIResponseError
+        console.log("Notion API request failed");
+        console.log(error);
+    }
 });
 
 
